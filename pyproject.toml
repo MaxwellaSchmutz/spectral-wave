@@ -1,0 +1,22 @@
+[project]
+name = "wave-propagation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "imageio>=2.37.2",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.2",
+    "opencv-python>=4.13.0.92",
+    "pyqt6>=6.10.2",
+    "pyqt6-webengine>=6.10.0",
+    "pyqtgraph>=0.14.0",
+    "scipy>=1.17.1",
+    "sympy>=1.14.0",
+]
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.19.0",
+]
