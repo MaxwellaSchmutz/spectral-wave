@@ -1,92 +1,142 @@
 # Spectral Wave Lab
 
-Interactive spectral wave simulation engine with customizable integrands and frequency-dependent scattering operators.
+An interactive numerical sandbox for exploring spectral representations of wave propagation and frequency-dependent scattering.
+
+This application allows users to define arbitrary spectral integrands, numerically compute the resulting wave evolution, and experiment with custom scattering operators in a fully interactive GUI.
 
 ---
 
-## Requirements
+## Overview
 
-- Python 3.10+
-- Git
+The system computes wave evolution using a spectral integral representation:
+
+ψ(t, x) = ∫ F(t, x, y) dy
+
+Users define the integrand F(t, x, y) directly.  
+The integral is evaluated numerically over a configurable frequency interval.
+
+When scattering is enabled, the system computes:
+
+ψ(t, x) =
+- ∫ (F + R(y)F) dy   if x < x₀  
+- ∫ (T(y)F) dy       if x ≥ x₀  
+
+where:
+
+- R(y) is a user-defined reflection coefficient
+- T(y) is a user-defined transmission coefficient
+- x₀ is the obstacle position
+
+All integrations are performed numerically using the trapezoidal rule.
 
 ---
 
-## Setup Instructions
+## Features
+
+- Multi-integrand stacking
+- Complex-valued wave support
+- Frequency-dependent scattering
+- Piecewise wave computation
+- Numerical precomputation with progress tracking
+- Replayable animation
+- Resizable UI layout
+- Symbolic expression parsing via SymPy
+
+This project is designed as a flexible spectral experimentation tool rather than a fixed physical model.
+
+---
+
+## Installation
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/spectral-wave.git
 cd spectral-wave
-### 2. Create a Virtual Environment
-```bash
+2. Create and Activate a Virtual Environment
+
+macOS / Linux:
+
 python -m venv .venv
-source .venv/bin/activate      # macOS / Linux
+source .venv/bin/activate
 
-# or
+Windows:
 
-```bash
-.venv\Scripts\activate         # Windows
-
-### 3. Install Dependencies
-```bash
+python -m venv .venv
+.venv\Scripts\activate
+3. Install Dependencies
 pip install numpy sympy matplotlib pyqt6
 
-If scattering features are used heavily, also install:
+Optional:
 
-```bash
 pip install scipy
-
-### 4. Run the Application
-```bash
+4. Run the Application
 python main.py
+Example Usage
+Basic Wave Packet
 
-Usage
-Define an Integrand
-
-Enter a spectral integrand of the form:
-
-F(t,x,y)
-
-Example:
+F(t, x, y):
 
 exp(1j*(t*cos(y) + x*y))
+Resonant Scattering
 
-Click Add Integrand, then Precompute & Animate.
+R(y):
 
-Enable Scattering (Optional)
+0.5/(0.5 + 1j*(y-0.8))
 
-Check Enable Scattering and define:
+T(y):
 
-R(y)
-T(y)
-Obstacle position x₀
+1 - R(y)
 
-Example:
+Obstacle position:
 
-R(y) = 0.5/(0.5 + 1j*(y-0.8))
-T(y) = 1 - R(y)
-x₀ = 0
-Notes
+0
+Perfect Reflection
 
-The system computes:
+R(y):
 
-ψ(t,x) = ∫ F(t,x,y) dy
+-1
 
-With scattering enabled:
+T(y):
 
-ψ(t,x) =
-    ∫ (F + R(y)F) dy   if x < x₀
-    ∫ (T(y)F) dy       if x ≥ x₀
+0
+Mathematical Intent
 
-All integrals are evaluated numerically using the trapezoidal rule.
+This tool is useful for exploring:
+
+Spectral decomposition of wave packets
+
+Frequency-selective scattering behavior
+
+Phase distortion under reflection
+
+Interference between multiple spectral components
+
+Piecewise-defined wave evolution
+
+It is intentionally built to allow experimentation with arbitrary integrands rather than restricting the user to a predefined PDE model.
 
 Tech Stack
 
-PyQt6
+Python
 
 NumPy
 
 SymPy
 
 Matplotlib
+
+PyQt6
+
+Project Status
+
+Active development.
+Planned expansions include:
+
+Matrix-valued scattering operators
+
+Energy-conserving enforcement modes
+
+Multi-channel wave systems
+
+Exportable simulation output
