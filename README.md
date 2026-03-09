@@ -19,18 +19,28 @@ Interactive spectral wave simulation engine with customizable integrands and fre
 git clone https://github.com/YOUR_USERNAME/spectral-wave.git
 cd spectral-wave
 ### 2. Create a Virtual Environment
+```bash
 python -m venv .venv
 source .venv/bin/activate      # macOS / Linux
+
 # or
+
+```bash
 .venv\Scripts\activate         # Windows
+
 ### 3. Install Dependencies
+```bash
 pip install numpy sympy matplotlib pyqt6
 
 If scattering features are used heavily, also install:
 
+```bash
 pip install scipy
+
 ### 4. Run the Application
+```bash
 python main.py
+
 Usage
 Define an Integrand
 
